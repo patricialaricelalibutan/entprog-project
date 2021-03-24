@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Donators";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+
+<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Donators List</h1>
+
+<br />
+
+<div class="wrapper">
+
+    <button type="button" class="btn btn-light">Top</button> &nbsp;
+    <button type="button" class="btn btn-light">Recent</button>
+
+</div>
+
+<br>
+
+<table class="table" style="margin-left: auto; margin-right:auto; width:75%;">
+    <thead>
+        <tr>
+            <th style="text-align:center;">
+                <h5>Name</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>Amount</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>Date</h5>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

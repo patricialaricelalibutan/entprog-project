@@ -1,0 +1,84 @@
+﻿@model FINALTEST1.Models.UserMonetary
+@{
+    ViewData["Title"] = "Donate Page";
+}
+
+
+<div class="container">
+    <div class="row" style="padding-top: 6%">
+        <div class="col-xl-6">
+            <h1 style="text-align: center; font-size: 45px; font-weight: bold;">Donate</h1>
+            <form asp-action="Donate" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="User.FirstName" class="control-label"></label>
+                    <input asp-for="User.FirstName" class="form-control" />
+                    <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.LastName" class="control-label"></label>
+                    <input asp-for="User.LastName" class="form-control" />
+                    <span asp-validation-for="User.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.City" class="control-label"></label>
+                    <input asp-for="User.City" class="form-control" />
+                    <span asp-validation-for="User.City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Email" class="control-label"></label>
+                    <input asp-for="User.Email" class="form-control" />
+                    <span asp-validation-for="User.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Monetary.Amount" class="control-label"></label>
+                    <input asp-for="Monetary.Amount" class="form-control" />
+                    <span asp-validation-for="Monetary.Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Monetary.Image" class="control-label"></label>
+                    <br />
+                    <input name="Image" required type="file" accept="image/*" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Donate" class="btn btn-primary btn-lg btn-block" />
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-6" style="padding-top: 4%">
+            <h4 class="text-primary">FOR IN-KIND DONATIONS</h4>
+            <p class="text-primary" style="font-size:1.1em; padding-top:1%;">ADDRESS</p>
+            <p style="font-size:1.1em">155 9th Street Cor. 10th Avenue Grace Park 1400, Caloocan City, Philippines</p>
+            <br />
+            <h4 class="text-primary">FOR MONETARY DONATIONS</h4>
+            <p class="text-primary" style="font-size:1.1em; padding-top:1%;">PAYMENT METHODS</p>
+            <br />
+            <div class="row">
+                <div class="col-4" style="line-height: 0.7; padding-top:2%;">
+                    <p class="text-primary" style="font-size:1.1em">PayMaya</p>
+                    <p style="font-size:1.1em">Jose Rizal</p>
+                    <p style="font-size:1.1em">0998-765-4321</p>
+                </div>
+                <div class="col-8">
+                    <img style="width:30%" src="~/img/Funds4Safety/qr.png" alt="Cubes">
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-4" style="line-height: 0.7; padding-top:2%;">
+                    <p class="text-primary" style="font-size:1.1em">GCash</p>
+                    <p style="font-size:1.1em">Maria Clara</p>
+                    <p style="font-size:1.1em">0912-345-6789</p>
+                </div>
+                <div class="col-8">
+                    <img style="width:30%" src="~/img/Funds4Safety/qr.png" alt="Cubes">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

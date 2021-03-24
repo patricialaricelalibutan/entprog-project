@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "Proof";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+
+<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Proof of Transactions</h1>
+
+<table class="table" style="margin-left: auto; margin-right:auto; width:75%;">
+    <thead>
+        <tr>
+            <th style="text-align:center;">
+                <h5>Item</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>Quantity</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>Unit Cost</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>Total Cost</h5>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<h1 style="text-align: center; font-size: 45px; font-weight: bold;">In-Kind</h1>
+<div class="wrapper">
+
+    <button type="button" class="btn btn-light">Top</button> &nbsp;
+    <button type="button" class="btn btn-light">Recent</button>
+
+</div>
+
+<br />
+
+<table class="table" style="margin-left: auto; margin-right:auto; width:75%;">
+    <thead>
+        <tr>
+            <th style="text-align:center;">
+                <h5>Name</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>Item</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>Quantity</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>Date</h5>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
