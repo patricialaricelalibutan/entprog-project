@@ -60,7 +60,7 @@ namespace FINALTEST1.Controllers
         private int UserID;
 
         [HttpPost]
-        public async Task<IActionResult> Donate(UserMonetary userMonetary, IFormFile Image)
+        public IActionResult Donate(UserMonetary userMonetary, IFormFile Image)
         {
             var newUser = new User()
             {
@@ -74,7 +74,7 @@ namespace FINALTEST1.Controllers
             if (UserID != 0)
             {
                 AddNewMonetary(userMonetary, Image);
-                await SendEmail(newUser.Email);
+                SendEmail(newUser.Email);
                 return RedirectToAction("Donate");
             }
             else
@@ -83,7 +83,7 @@ namespace FINALTEST1.Controllers
                 _context.SaveChanges();
                 UserID = GetUserId(newUser);
                 AddNewMonetary(userMonetary, Image);
-                await SendEmail(newUser.Email);
+                SendEmail(newUser.Email);
                 return RedirectToAction("Donate");
             }
         }
@@ -122,36 +122,33 @@ namespace FINALTEST1.Controllers
             _context.SaveChanges();
         }
 
-        public async Task SendEmail(string email)
+        public void SendEmail(string email)
         {
             Email userEmailOptions = new Email
             {
-                ToEmails = new List<string>() { email },
+                ToEmail = email,
                 Subject = "This is test email from Funds4Safety fundraising website",
-                Body = System.IO.File.ReadAllText(string.Format(@"EmailTemplate/{0}.html", "EmailContent"))
+                Body = System.IO.File.ReadAllText(string.Format(@"EmailTemplate/EmailContent.html"))
             };
             MailMessage mail = new MailMessage
             {
                 Subject = userEmailOptions.Subject,
-                Body = userEmailOptions.Body,
+                IsBodyHtml = _smtpConfig.IsBodyHTML,
                 From = new MailAddress(_smtpConfig.SenderAddress, _smtpConfig.SenderDisplayName),
-                IsBodyHtml = _smtpConfig.IsBodyHTML
+                Body = userEmailOptions.Body
             };
-            foreach (var toEmail in userEmailOptions.ToEmails)
-            {
-                mail.To.Add(toEmail);
-            }
+            mail.To.Add(userEmailOptions.ToEmail);
             NetworkCredential networkCredential = new NetworkCredential(_smtpConfig.UserName, _smtpConfig.Password);
             SmtpClient smtpClient = new SmtpClient
             {
-                Host = _smtpConfig.Host,
                 Port = _smtpConfig.Port,
+                Host = _smtpConfig.Host,
                 EnableSsl = _smtpConfig.EnableSSL,
                 UseDefaultCredentials = _smtpConfig.UseDefaultCredentials,
                 Credentials = networkCredential
             };
             mail.BodyEncoding = Encoding.Default;
-            await smtpClient.SendMailAsync(mail);
+            smtpClient.Send(mail);
         }
     }
 }
