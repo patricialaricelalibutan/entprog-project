@@ -31,6 +31,7 @@ namespace FINALTEST1.Controllers
 
         public IActionResult Index()
         {
+            // SQL: SELECT SUM(Amount) FROM Monetaries WHERE Validate = 1
             decimal totalAmount = _context.Monetaries
                 .Where(a => a.Validate == true)
                 .ToList().Sum(a => a.Amount);
@@ -84,12 +85,14 @@ namespace FINALTEST1.Controllers
 
         private int GetUserId(User user)
         {
+            // SQL: SELECT USerID FROM Users WHERE FirstName = user.FirstName AND LastName = user.LastName AND City = user.City AND Email = user.Email
             var User = from u in _context.Users
                        where u.FirstName == user.FirstName && 
                        u.LastName == user.LastName && 
                        u.City == user.City && 
                        u.Email == user.Email
                        select new { u.UserID };
+
             if (User.FirstOrDefault() == null)
                 return 0;
             else
