@@ -71,21 +71,15 @@ namespace FINALTEST1.Controllers
             };
             _toastNotification.AddInfoToastMessage(newUser.LastName + " " + newUser.FirstName + " Thank you for your donation!");
             UserID = GetUserId(newUser);
-            if (UserID != 0)
-            {
-                AddNewMonetary(userMonetary, Image);
-                SendEmail(newUser.Email);
-                return RedirectToAction("Donate");
-            }
-            else
+            if (UserID == 0)
             {
                 _context.Users.Add(newUser);
                 _context.SaveChanges();
                 UserID = GetUserId(newUser);
-                AddNewMonetary(userMonetary, Image);
-                SendEmail(newUser.Email);
-                return RedirectToAction("Donate");
             }
+            AddNewMonetary(userMonetary, Image);
+            SendEmail(newUser.Email);
+            return RedirectToAction("Donate");
         }
 
         private int GetUserId(User user)
