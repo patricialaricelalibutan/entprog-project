@@ -124,7 +124,7 @@ namespace FINALTEST1.Controllers
             Email userEmailOptions = new Email
             {
                 ToEmail = email,
-                Subject = "This is test email from Funds4Safety fundraising website",
+                Subject = "MONETARY DONATIONS",
                 Body = System.IO.File.ReadAllText(string.Format(@"EmailTemplate/EmailContent.html"))
             };
             MailMessage mail = new MailMessage
