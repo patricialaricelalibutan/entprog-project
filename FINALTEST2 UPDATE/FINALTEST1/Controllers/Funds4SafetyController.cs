@@ -22,6 +22,7 @@ namespace FINALTEST1.Controllers
         private readonly SMTPConfig _smtpConfig;
         private readonly IToastNotification _toastNotification;
 
+        //Toast Notification in the upper right after donating in Donate Page
         public Funds4SafetyController(ApplicationDbContext context, IOptions<SMTPConfig> smtpConfig, IToastNotification toastNotification)
         {
             _context = context;
@@ -29,6 +30,7 @@ namespace FINALTEST1.Controllers
             _toastNotification = toastNotification;
         }
 
+        //Home Page with the Total Money Raised code
         public IActionResult Index()
         {
             // SQL: SELECT SUM(Amount) FROM Monetaries WHERE Validate = 1
@@ -38,22 +40,8 @@ namespace FINALTEST1.Controllers
             return View(totalAmount);
         }
 
+        //Donate Page codes
         public IActionResult Donate()
-        {
-            return View();
-        }
-
-        public IActionResult Donators()
-        {
-            return View();
-        }
-
-        public IActionResult Proof()
-        {
-            return View();
-        }
-
-        public IActionResult Gallery()
         {
             return View();
         }
@@ -70,7 +58,7 @@ namespace FINALTEST1.Controllers
                 City = userMonetary.User.City.TrimStart().TrimEnd(),
                 Email = userMonetary.User.Email.TrimStart().TrimEnd()
             };
-            _toastNotification.AddInfoToastMessage(newUser.LastName + " " + newUser.FirstName + " Thank you for your donation!");
+            _toastNotification.AddInfoToastMessage(newUser.FirstName + " " + newUser.LastName + "," + " Thank you for your donation!");
             UserID = GetUserId(newUser);
             if (UserID == 0)
             {
@@ -146,6 +134,24 @@ namespace FINALTEST1.Controllers
             };
             mail.BodyEncoding = Encoding.Default;
             smtpClient.Send(mail);
+        }
+
+        //Donators Page
+        public IActionResult Donators()
+        {
+            return View();
+        }
+
+        //Proof Page
+        public IActionResult Proof()
+        {
+            return View();
+        }
+
+        //Gallery Page
+        public IActionResult Gallery()
+        {
+            return View();
         }
     }
 }
