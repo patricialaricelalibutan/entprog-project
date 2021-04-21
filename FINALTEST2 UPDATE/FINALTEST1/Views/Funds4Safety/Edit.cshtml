@@ -1,0 +1,22 @@
+﻿@using FINALTEST1.Models
+@model DonatorsPage
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Edit</h1>
+
+<br />
+<form action="~/Funds4Safety/Edit" method="post">
+    <input type="hidden" name="UserID" value="@Model.UserID" />
+    First Name
+    <input type="text" name="FirstName" value="@Model.FirstName" />
+    <br />
+    Last Name
+    <input type="text" name="LastName" value="@Model.LastName" />
+    <br />
+    <button type="submit">Save Changes</button>
+</form>

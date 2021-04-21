@@ -137,9 +137,96 @@ namespace FINALTEST1.Controllers
         }
 
         //Donators Page
+
+        //[Donators Page]List Donators (Default)
         public IActionResult Donators()
         {
-            return View();
+            DonatorsPage dn = new DonatorsPage();
+            List<DonatorsPage> dnList = dn.GetAll();
+
+            return View(dnList);
+        }
+
+        //[Donators Page]List Donators (Top)
+        public IActionResult DonatorsTop()
+        {
+            DonatorsPage dn = new DonatorsPage();
+            List<DonatorsPage> dnList = dn.GetAllTop();
+
+            return View(dnList);
+        }
+
+        //[Donators Page]List Donators (Recent)
+        public IActionResult DonatorsRecent()
+        {
+            DonatorsPage dn = new DonatorsPage();
+            List<DonatorsPage> dnList = dn.GetAllRecent();
+
+            return View(dnList);
+        }
+
+        //[Donators Page]Edit (First and Last Name)
+        public IActionResult Edit(int uID)
+        {
+            if (uID <= 0)
+            {
+                return RedirectToAction("Donators", "Funds4Safety");
+            }
+
+            DonatorsPage dn = new DonatorsPage();
+            dn = dn.Get(uID);
+
+            if (dn.UserID == 0)
+            {
+                return RedirectToAction("Donators", "Funds4Safety");
+            }
+            else
+            {
+                return View(dn);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(DonatorsPage model)
+        {
+            model.Edit();
+            return RedirectToAction("Donators", "Funds4Safety");
+        }
+
+        //[Donators Page]Edit (Amount and Validate)
+        public IActionResult EditMonetary(int mID)
+        {
+            if (mID <= 0)
+            {
+                return RedirectToAction("Donators", "Funds4Safety");
+            }
+
+            DonatorsPage dn = new DonatorsPage();
+            dn = dn.GetMonetary(mID);
+
+            if (dn.MonetaryID == 0)
+            {
+                return RedirectToAction("Donators", "Funds4Safety");
+            }
+            else
+            {
+                return View(dn);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult EditMonetary(DonatorsPage model)
+        {
+            model.EditMonetary();
+            return RedirectToAction("Donators", "Funds4Safety");
+        }
+
+        //[Donators Page]Delete
+        [HttpPost]
+        public IActionResult Delete(DonatorsPage model)
+        {
+            model.Delete();
+            return RedirectToAction("Donators", "Funds4Safety");
         }
 
         //Proof Page
