@@ -1,15 +1,12 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Proof";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
 <br />
-
 <h1 style="text-align: center; font-size: 45px; font-weight: bold;">Proof of Transactions</h1>
 
-<table class="table" style="margin-left: auto; margin-right:auto; width:75%;">
+<table class="table text-center" style="margin-left: auto; margin-right:auto; width:75%;">
     <thead>
         <tr>
             <th style="text-align:center;">
@@ -37,16 +34,17 @@
 <br />
 
 <h1 style="text-align: center; font-size: 45px; font-weight: bold;">In-Kind</h1>
-<div class="wrapper">
 
-    <button type="button" class="btn btn-light">Top</button> &nbsp;
-    <button type="button" class="btn btn-light">Recent</button>
+<br />
 
+<div class="row justify-content-center">
+    <a class="btn btn-primary" asp-area="" asp-controller="Funds4Safety" asp-action="DonatorsTop">Top</a> &nbsp;
+    <a class="btn btn-primary" asp-area="" asp-controller="Funds4Safety" asp-action="DonatorsRecent">Recent</a>
 </div>
 
 <br />
 
-<table class="table" style="margin-left: auto; margin-right:auto; width:75%;">
+<table class="table text-center" style="margin-left: auto; margin-right:auto; width:75%;">
     <thead>
         <tr>
             <th style="text-align:center;">
@@ -66,8 +64,3 @@
     <tbody>
     </tbody>
 </table>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-

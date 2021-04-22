@@ -2,21 +2,29 @@
 @model DonatorsPage
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br />
-
-<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Edit</h1>
-
-<br />
 <form action="~/Funds4Safety/Edit" method="post">
-    <input type="hidden" name="UserID" value="@Model.UserID" />
-    First Name
-    <input type="text" name="FirstName" value="@Model.FirstName" />
-    <br />
-    Last Name
-    <input type="text" name="LastName" value="@Model.LastName" />
-    <br />
-    <button type="submit">Save Changes</button>
+    <div class="container">
+        <div class="card bg-light shadow p-5 mt-5 mx-auto w-40rem">
+            <h1 style="text-align: center; font-size: 45px; font-weight: bold;">Edit</h1>
+            <hr />
+            <div class="form-group">
+                <input type="hidden" name="UserID" value="@Model.UserID" />
+            </div>
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="FirstName" value="@Model.FirstName" />
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="LastName" value="@Model.LastName" />
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <br />
+            <div class="form-group">
+                <a type="button" class="btn btn-primary" asp-action="Donators">Go Back</a>
+            </div>
+        </div>
+    </div>
 </form>

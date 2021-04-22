@@ -240,5 +240,55 @@ namespace FINALTEST1.Controllers
         {
             return View();
         }
+
+        //Contact Us Page
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(Contact record)
+        {
+            using (MailMessage mail = new MailMessage("funds4safety@gmail.com", record.Email))
+            {
+                mail.Subject = record.Subject;
+
+                string message = "<div class='header header--padded--inline' id='emb-email-header-container'>" +
+                                    "<div class='logo emb-logo-margin-box' align='center' style='Margin-top:20px;Margin-bottom:20px;'>" +
+                                        "<div align='center' id='emb-email-header' class='logo-center'>" +
+                                            "<img src='https://i1.createsend1.com/resize/ti/y/29/80A/5BC/eblogo/LogoFunds4Safety.png' alt='' width='315' style='max-width:315px'>" +
+                                        "</div>" +
+                                    "</div>" +
+                                 "</div>" +
+                                 "<br />" +
+                                 "<br />" +
+                                 "<h1>Hi " + record.SenderName + "!</h1>" +
+                                 "<p style='font-size:20px'>We received your inquiry and we will get back to you soon.</p>" +
+                                 "<p style='font-size:20px'>Thank you.</p>" +
+                                 "<br />" +
+                                 "<h2>Your message:</h2>" +
+                                 "<p style='font-size:17px'>" + record.Message + "</p>" +
+                                 "<br />" +
+                                 "<br />" +
+                                 "<h3>Funds4Safety<br />155 9th Street Cor. 10th Avenue Grace Park 1400, Caloocan City, Philippines</h3>";
+
+                mail.Body = message;
+                mail.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    NetworkCredential NetworkCred = new NetworkCredential("funds4safety@gmail.com", "entprog123");
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mail);
+                    ViewBag.Message = "Inquiry sent.";
+                }
+            }
+            return View();
+        }
     }
 }

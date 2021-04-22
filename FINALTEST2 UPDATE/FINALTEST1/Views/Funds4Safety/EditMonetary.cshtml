@@ -2,27 +2,36 @@
 @model DonatorsPage
 @{
     ViewData["Title"] = "Edit Monetary";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br />
-
-<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Edit</h1>
-
-<br />
 <form action="~/Funds4Safety/EditMonetary" method="post">
-    <input type="hidden" name="MonetaryID" value="@Model.MonetaryID" />
-    Amount
-    <input type="text" name="Amount" value="@Model.Amount" />
-    <br />
-    Validation Status
-    <input type="text" name="Validate" value="@Model.Validate" disabled />
-    <br />
-    True
-    <input type="radio" name="Validate" value="True">
-    <br />
-    False
-    <input type="radio" name="Validate" value="False">
-    <br />
-    <button type="submit">Save Changes</button>
+    <div class="container">
+        <div class="card bg-light shadow p-5 mt-5 mx-auto w-40rem">
+            <h1 style="text-align: center; font-size: 45px; font-weight: bold;">Edit</h1>
+            <hr />
+            <div class="form-group">
+                <input type="hidden" name="MonetaryID" value="@Model.MonetaryID" />
+            </div>
+            <div class="form-group">
+                <label>Amount</label>
+                <input type="text" name="Amount" value="@Model.Amount" />
+            </div>
+            <div class="form-group">
+                <label>Validation Status</label>
+                <input type="text" name="Validate" value="@Model.Validate" disabled />
+            </div>
+            <div class="form-group">
+                <label>True</label>
+                <input type="radio" name="Validate" value="True">
+                &nbsp;&nbsp;&nbsp;
+                <label>False</label>
+                <input type="radio" name="Validate" value="False">
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <br />
+            <div class="form-group">
+                <a type="button" class="btn btn-primary" asp-action="Donators">Go Back</a>
+            </div>
+        </div>
+    </div>
 </form>
