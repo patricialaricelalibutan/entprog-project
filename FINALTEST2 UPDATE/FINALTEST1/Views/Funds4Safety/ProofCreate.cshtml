@@ -1,0 +1,43 @@
+﻿@model FINALTEST1.Models.Transaction
+@{
+    ViewData["Title"] = "Add Transaction";
+}
+
+<form asp-action="ProofCreate">
+    <div class="container">
+        <div class="card bg-light shadow p-5 mt-5 mx-auto w-40rem">
+            <h1 style="text-align: center; font-size: 45px; font-weight: bold;">Add Transaction</h1>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Item" class="control-label"></label>
+                <input asp-for="Item" class="form-control" />
+                <span asp-validation-for="Item" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitCost" class="control-label"></label>
+                <input asp-for="UnitCost" class="form-control" />
+                <span asp-validation-for="UnitCost" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input style="display:none" class="form-check-input" asp-for="Out" checked />
+                </label>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+            <br />
+            <div class="form-group">
+                <a type="button" class="btn btn-primary" asp-action="Proof">Go Back</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

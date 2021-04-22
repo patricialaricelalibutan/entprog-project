@@ -2,28 +2,29 @@
 @model List<DonatorsPage>
 @{
     ViewData["Title"] = "Donators";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
-
-<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Donators List</h1>
+<br />
+<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Donators</h1>
 
 <br />
 
-<div class="wrapper">
-
+<div class="row justify-content-center">
     <a class="btn btn-primary active" aria-pressed="true" asp-area="" asp-controller="Funds4Safety" asp-action="Donators">Default</a> &nbsp;
     <a class="btn btn-primary" asp-area="" asp-controller="Funds4Safety" asp-action="DonatorsTop">Top</a> &nbsp;
-    <a class="btn btn-primary" asp-area="" asp-controller="Funds4Safety" asp-action="DonatorsRecent">Recent</a>
-
+    <a class="btn btn-primary" asp-area="" asp-controller="Funds4Safety" asp-action="DonatorsRecent">Recent</a> &nbsp;
+    <a class="btn btn-primary" asp-area="" onclick="window.print()">Print</a>
 </div>
 
 <br>
 
-<table class="table" style="margin-left: auto; margin-right:auto; width:75%;">
+<table class="table text-center" style="margin-left: auto; margin-right:auto; width:75%;">
     <thead>
         <tr>
+            <th style="text-align:center;">
+                <h5>UserID</h5>
+            </th>
             <th style="text-align:center;">
                 <h5>First Name</h5>
             </th>
@@ -31,7 +32,7 @@
                 <h5>Last Name</h5>
             </th>
             <th style="text-align:center;">
-                <h5>Amount</h5>
+                <h5>Amount(PHP)</h5>
             </th>
             <th style="text-align:center;">
                 <h5>Date</h5>
@@ -39,8 +40,12 @@
             <th style="text-align:center;">
                 <h5>Validated</h5>
             </th>
-            <th></th>
-            <th></th>
+            <th style="text-align:center;">
+                <h5>Edit First and Last Names</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>Edit Amount and Validated</h5>
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -48,29 +53,25 @@
         @foreach (DonatorsPage item in Model)
         {
             <tr>
+                <td>@item.UserID</td>
                 <td>@item.FirstName</td>
                 <td>@item.LastName</td>
                 <td>@item.Amount</td>
                 <td>@item.Date</td>
                 <td>@item.Validate</td>
                 <td>
-                    <a href="~/Funds4Safety/Edit?uID=@item.UserID">Edit First Name and Last Names</a>
+                    <a class="btn btn-primary" href="~/Funds4Safety/Edit?uID=@item.UserID">Edit</a>
                 </td>
                 <td>
-                    <a href="~/Funds4Safety/EditMonetary?mID=@item.MonetaryID">Edit Amount and Validated</a>
+                    <a class="btn btn-secondary" href="~/Funds4Safety/EditMonetary?mID=@item.MonetaryID">Edit</a>
                 </td>
                 <td>
                     <form action="~/Funds4Safety/Delete" method="post">
                         <input type="hidden" name="UserID" value="@item.UserID" />
-                        <button type="submit">Delete</button>
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-

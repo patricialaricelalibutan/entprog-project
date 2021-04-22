@@ -13,6 +13,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using NToastNotify;
+using Microsoft.EntityFrameworkCore;
 
 namespace FINALTEST1.Controllers
 {
@@ -232,12 +233,233 @@ namespace FINALTEST1.Controllers
         //Proof Page
         public IActionResult Proof()
         {
+            var list = _context.Transactions.ToList();
+            return View(list);
+        }
+
+        public IActionResult ProofCreate()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult ProofCreate(Transaction record)
+        {
+            var item = new Transaction();
+            {
+                item.TransactionID = record.TransactionID;
+                item.Item = record.Item;
+                item.Quantity = record.Quantity;
+                item.UnitCost = record.UnitCost;
+                item.Out = record.Out;
+            };
+
+            _context.Transactions.Add(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("Proof");
+        }
+
+        //Proof Edit
+        public IActionResult ProofEdit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Proof");
+            }
+
+            var item = _context.Transactions.Where(i => i.TransactionID == id).SingleOrDefault();
+            if (item == null)
+            {
+                return RedirectToAction("Proof");
+            }
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult ProofEdit(int? id, Transaction record)
+        {
+            var item = _context.Transactions.Where(i => i.TransactionID == id).SingleOrDefault();
+            item.TransactionID = record.TransactionID;
+            item.Item = record.Item;
+            item.Quantity = record.Quantity;
+            item.UnitCost = record.UnitCost;
+            item.Out = record.Out;
+
+            _context.Transactions.Update(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("Proof");
+        }
+
+        //proof delete
+        public IActionResult ProofDelete(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Proof");
+            }
+
+            var item = _context.Transactions.Where(i => i.TransactionID == id).SingleOrDefault();
+            if (item == null)
+            {
+                return RedirectToAction("Proof");
+            }
+
+            _context.Transactions.Remove(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("Proof");
+        }
+
+        //InKind page
+        public IActionResult InKind()
+        {
+            var list = _context.InKinds.Include(x => x.User).ToList();
+            return View(list);
+        }
+
+        //inkind add
+        public IActionResult InKindCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult InKindCreate(InKind record)
+        {
+            var item = new InKind();
+            {
+                item.UserID = record.UserID;
+                item.InKindID = record.InKindID;
+                item.Item = record.Item;
+                item.Quantity = record.Quantity;
+                item.Date = record.Date;
+            };
+
+            _context.InKinds.Add(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("InKind");
+        }
+
+        //inkind edit
+        public IActionResult InKindEdit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("InKind");
+            }
+
+            var item = _context.InKinds.Where(i => i.InKindID == id).SingleOrDefault();
+            if (item == null)
+            {
+                return RedirectToAction("InKind");
+            }
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult InKindEdit(int? id, InKind record)
+        {
+            var item = _context.InKinds.Where(i => i.InKindID == id).SingleOrDefault();
+            item.UserID = record.UserID;
+            item.InKindID = record.InKindID;
+            item.Item = record.Item;
+            item.Quantity = record.Quantity;
+            item.Date = record.Date;
+
+            _context.InKinds.Update(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("InKind");
+        }
+
+        //inkind delete
+        public IActionResult InKindDelete(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("InKind");
+            }
+
+            var item = _context.InKinds.Where(i => i.InKindID == id).SingleOrDefault();
+            if (item == null)
+            {
+                return RedirectToAction("InKind");
+            }
+
+            _context.InKinds.Remove(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("InKind");
+        }
+
+        public IActionResult TopInKind()
+        {
+            var list = _context.InKinds.Include(x => x.User).OrderByDescending(x => x.Quantity).ToList();
+            return View(list);
+        }
+
+        public IActionResult RecentInKind()
+        {
+            var list = _context.InKinds.Include(x => x.User).OrderByDescending(x => x.Date).ToList();
+            return View(list);
         }
 
         //Gallery Page
         public IActionResult Gallery()
         {
+            return View();
+        }
+
+        //Contact Us Page
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(Contact record)
+        {
+            using (MailMessage mail = new MailMessage("funds4safety@gmail.com", record.Email))
+            {
+                mail.Subject = record.Subject;
+
+                string message = "<div class='header header--padded--inline' id='emb-email-header-container'>" +
+                                    "<div class='logo emb-logo-margin-box' align='center' style='Margin-top:20px;Margin-bottom:20px;'>" +
+                                        "<div align='center' id='emb-email-header' class='logo-center'>" +
+                                            "<img src='https://i1.createsend1.com/resize/ti/y/29/80A/5BC/eblogo/LogoFunds4Safety.png' alt='' width='315' style='max-width:315px'>" +
+                                        "</div>" +
+                                    "</div>" +
+                                 "</div>" +
+                                 "<br />" +
+                                 "<br />" +
+                                 "<h1>Hi " + record.SenderName + "!</h1>" +
+                                 "<p style='font-size:20px'>We received your inquiry and we will get back to you soon.</p>" +
+                                 "<p style='font-size:20px'>Thank you.</p>" +
+                                 "<br />" +
+                                 "<h2>Your message:</h2>" +
+                                 "<p style='font-size:17px'>" + record.Message + "</p>" +
+                                 "<br />" +
+                                 "<br />" +
+                                 "<h3>Funds4Safety<br />155 9th Street Cor. 10th Avenue Grace Park 1400, Caloocan City, Philippines</h3>";
+
+                mail.Body = message;
+                mail.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    NetworkCredential NetworkCred = new NetworkCredential("funds4safety@gmail.com", "entprog123");
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mail);
+                    ViewBag.Message = "Inquiry sent.";
+                }
+            }
             return View();
         }
 
