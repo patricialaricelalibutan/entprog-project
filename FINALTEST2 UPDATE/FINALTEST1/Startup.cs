@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Microsoft.AspNetCore.Identity;
 using FINALTEST1.Data;
 using Microsoft.EntityFrameworkCore;
 using FINALTEST1.Models;
@@ -30,8 +30,14 @@ namespace FINALTEST1
             services.AddDbContext<ApplicationDbContext>(option =>
                 option.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
             services.Configure<SMTPConfig>(Configuration.GetSection("SMTPConfig"));
+
+            services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddRazorPages().AddNToastNotifyNoty();
             services.AddControllersWithViews();
+
+            services.AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +58,7 @@ namespace FINALTEST1
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseNToastNotify();
@@ -60,7 +67,8 @@ namespace FINALTEST1
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Funds4Safety}/{action=Index}/{id?}");
+                    pattern: "{controller=Funds4Safety}/{action=Login}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

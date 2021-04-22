@@ -62,7 +62,7 @@ namespace FINALTEST1.Controllers
             UserID = GetUserId(newUser);
             if (UserID == 0)
             {
-                _context.Users.Add(newUser);
+                _context.User.Add(newUser);
                 _context.SaveChanges();
                 UserID = GetUserId(newUser);
             }
@@ -74,7 +74,7 @@ namespace FINALTEST1.Controllers
         private int GetUserId(User user)
         {
             // SQL: SELECT USerID FROM Users WHERE FirstName = user.FirstName AND LastName = user.LastName AND City = user.City AND Email = user.Email
-            var User = from u in _context.Users
+            var User = from u in _context.User
                        where u.FirstName == user.FirstName && 
                        u.LastName == user.LastName && 
                        u.City == user.City && 
@@ -239,6 +239,11 @@ namespace FINALTEST1.Controllers
         public IActionResult Gallery()
         {
             return View();
+        }
+
+        public IActionResult Login()
+        {
+            return LocalRedirect("/Identity/Account/Login");
         }
     }
 }

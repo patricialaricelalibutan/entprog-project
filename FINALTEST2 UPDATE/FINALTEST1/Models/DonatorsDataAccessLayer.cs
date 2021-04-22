@@ -12,7 +12,7 @@ namespace FINALTEST1.Models
 {
     class DonatorsDataAccessLayer
     {
-        private const string ConnectionString = "Server=localhost\\SQLEXPRESS;Database=Funds4Safety;UID=DEJESUSS;PWD=entprog2t";
+        private const string ConnectionString = "Server=LAPTOP-62Q6SGTI;Database=Funds4Safety;UID=libutanp;PWD=189770781;";
         private SqlConnection cn = new SqlConnection(ConnectionString);
         private SqlCommand cmd;
 

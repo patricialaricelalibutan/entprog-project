@@ -4,41 +4,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="gallery-block cards-gallery">
-    <div class="container">
-        <div class="heading">
-            <h1>Gallery</h1>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-lg-4">
-                <div class="card border-0 transform-container-hover">
-                    <a class="lightbox" href="~/img/Funds4Safety/sample.jpg"><img src="~/img/Funds4Safety/sample.jpg" width="340px"/></a>
-                    <div class="card-body">
-                        <h6>Photo by Oleg Magni from Pexels</h6>
-                        <p class="text-muted card-text">https://www.pexels.com/photo/gray-metal-cubes-decorative-1005644/</p>
-                    </div>
+<style>
+    .card-body {
+        padding: 5px;
+    }
+    h1 {
+        text-align: center; 
+        font-size: 45px; 
+        font-weight: bold;
+    }
+</style>
+
+<br/>
+<h1>Gallery</h1>
+<br/>
+
+<div class="container">
+    <div class="row">
+        <div class="card-columns">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/img/Funds4Safety/pexels-liza-summer-6348123.jpg" alt="Image" width="100%" />
                 </div>
             </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 transform-container-hover">
-                    <a class="lightbox" href="~/img/Funds4Safety/sample.jpg"><img src="~/img/Funds4Safety/sample.jpg" width="340px" /></a>
-                    <div class="card-body">
-                        <h6>Photo by Oleg Magni from Pexels</h6>
-                        <p class="text-muted card-text">https://www.pexels.com/photo/gray-metal-cubes-decorative-1005644/</p>
-                    </div>
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/img/Funds4Safety/pexels-rodnae-productions-6646984.jpg" alt="Image" width="100%" />
                 </div>
             </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 transform-container-hover">
-                    <a class="lightbox" href="~/img/Funds4Safety/sample.jpg"><img src="~/img/Funds4Safety/sample.jpg" width="340px" /></a>
-                    <div class="card-body">
-                        <h6>Photo by Oleg Magni from Pexels</h6>
-                        <p class="text-muted card-text">https://www.pexels.com/photo/gray-metal-cubes-decorative-1005644/</p>
-                    </div>
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/img/Funds4Safety/pexels-brett-sayles-5269681.jpg" alt="Image" width="100%" />
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/img/Funds4Safety/pexels-rodnae-productions-6647123.jpg" alt="Image" width="100%" />
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/img/Funds4Safety/pexels-mikhail-nilov-7475389.jpg" alt="Image" width="100%" />
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/img/Funds4Safety/pexels-rodnae-productions-6646846.jpg" alt="Image" width="100%" />
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
