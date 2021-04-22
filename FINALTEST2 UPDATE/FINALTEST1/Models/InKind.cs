@@ -17,8 +17,8 @@ namespace FINALTEST1.Models
         [Required]
         public int UserID { get; set; }
 
-        [ForeignKey("Transaction")]
-        public int? TransactionID { get; set; }
+        //[ForeignKey("Transaction")]
+        //public int? TransactionID { get; set; }
 
         [Required]
         public string Item { get; set; }

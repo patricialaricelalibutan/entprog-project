@@ -1,66 +1,61 @@
-﻿@{
-    ViewData["Title"] = "Proof";
+﻿@model IEnumerable<FINALTEST1.Models.Transaction>
+@{
+    ViewData["Title"] = "Transactions";
 }
 
 <br />
 <br />
-<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Proof of Transactions</h1>
-
-<table class="table text-center" style="margin-left: auto; margin-right:auto; width:75%;">
-    <thead>
-        <tr>
-            <th style="text-align:center;">
-                <h5>Item</h5>
-            </th>
-            <th style="text-align:center;">
-                <h5>Quantity</h5>
-            </th>
-            <th style="text-align:center;">
-                <h5>Unit Cost</h5>
-            </th>
-            <th style="text-align:center;">
-                <h5>Total Cost</h5>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-
-<br />
-<br />
-<br />
-<br />
-<br />
-
-<h1 style="text-align: center; font-size: 45px; font-weight: bold;">In-Kind</h1>
+<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Transactions</h1>
 
 <br />
 
 <div class="row justify-content-center">
-    <a class="btn btn-primary" asp-area="" asp-controller="Funds4Safety" asp-action="DonatorsTop">Top</a> &nbsp;
-    <a class="btn btn-primary" asp-area="" asp-controller="Funds4Safety" asp-action="DonatorsRecent">Recent</a>
+    <a class="btn btn-primary" asp-area="" asp-action="ProofCreate">Add Transaction</a>
 </div>
 
 <br />
-
 <table class="table text-center" style="margin-left: auto; margin-right:auto; width:75%;">
     <thead>
         <tr>
             <th style="text-align:center;">
-                <h5>Name</h5>
+                <h5>@Html.DisplayNameFor(model => model.Item)</h5>
             </th>
             <th style="text-align:center;">
-                <h5>Item</h5>
+                <h5>@Html.DisplayNameFor(model => model.Quantity)</h5>
             </th>
             <th style="text-align:center;">
-                <h5>Quantity</h5>
+                <h5>@Html.DisplayNameFor(model => model.UnitCost)</h5>
             </th>
             <th style="text-align:center;">
-                <h5>Date</h5>
+                <h5>@Html.DisplayNameFor(model => model.TotalCost)</h5>
             </th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCost)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="ProofEdit" asp-route-id="@item.TransactionID">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-action="ProofDelete" asp-route-id="@item.TransactionID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

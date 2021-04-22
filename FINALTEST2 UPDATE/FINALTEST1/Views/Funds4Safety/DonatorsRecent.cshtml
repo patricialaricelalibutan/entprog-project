@@ -6,7 +6,7 @@
 
 <br />
 <br />
-<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Donators List</h1>
+<h1 style="text-align: center; font-size: 45px; font-weight: bold;">Donators</h1>
 
 <br />
 
@@ -22,6 +22,9 @@
 <table class="table text-center" style="margin-left: auto; margin-right:auto; width:75%;">
     <thead>
         <tr>
+            <th style="text-align:center;">
+                <h5>UserID</h5>
+            </th>
             <th style="text-align:center;">
                 <h5>First Name</h5>
             </th>
@@ -50,6 +53,7 @@
         @foreach (DonatorsPage item in Model)
         {
             <tr>
+                <td>@item.UserID</td>
                 <td>@item.FirstName</td>
                 <td>@item.LastName</td>
                 <td>@item.Amount</td>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<FINALTEST1.Models.InKind>
+@{
+    ViewData["Title"] = "In Kind Donations";
+}
+
+<br />
+<br />
+<h1 style="text-align: center; font-size: 45px; font-weight: bold;">In Kind Donations</h1>
+
+<br />
+
+<div class="row justify-content-center">
+    <a class="btn btn-primary active" aria-pressed="true" asp-area="" asp-controller="Funds4Safety" asp-action="InKind">Default</a> &nbsp;
+    <a class="btn btn-primary" asp-action="TopInKind">Top</a> &nbsp;
+    <a class="btn btn-primary" asp-action="RecentInKind">Recent</a> &nbsp;
+    <a class="btn btn-primary" asp-action="InKindCreate">Add In Kind Donation</a> &nbsp;
+</div>
+
+<br />
+
+<table class="table text-center" style="margin-left: auto; margin-right:auto; width:75%;">
+    <thead>
+        <tr>
+            <th style="text-align:center;">
+                <h5>Name</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>@Html.DisplayNameFor(model => model.Item)</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>@Html.DisplayNameFor(model => model.Quantity)</h5>
+            </th>
+            <th style="text-align:center;">
+                <h5>@Html.DisplayNameFor(model => model.Date)</h5>
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="InKindEdit" asp-route-id="@item.InKindID">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-action="InKindDelete" asp-route-id="@item.InKindID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

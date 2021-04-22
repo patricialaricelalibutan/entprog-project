@@ -24,6 +24,7 @@ namespace FINALTEST1.Models
         public decimal? UnitCost { get; set; }
 
         [Display(Name = "Total Cost")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public decimal? TotalCost { get; set; }
 
         [Required]

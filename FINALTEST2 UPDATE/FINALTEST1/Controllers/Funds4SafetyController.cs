@@ -13,6 +13,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using NToastNotify;
+using Microsoft.EntityFrameworkCore;
 
 namespace FINALTEST1.Controllers
 {
@@ -232,7 +233,178 @@ namespace FINALTEST1.Controllers
         //Proof Page
         public IActionResult Proof()
         {
+            var list = _context.Transactions.ToList();
+            return View(list);
+        }
+
+        public IActionResult ProofCreate()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult ProofCreate(Transaction record)
+        {
+            var item = new Transaction();
+            {
+                item.TransactionID = record.TransactionID;
+                item.Item = record.Item;
+                item.Quantity = record.Quantity;
+                item.UnitCost = record.UnitCost;
+                item.Out = record.Out;
+            };
+
+            _context.Transactions.Add(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("Proof");
+        }
+
+        //Proof Edit
+        public IActionResult ProofEdit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Proof");
+            }
+
+            var item = _context.Transactions.Where(i => i.TransactionID == id).SingleOrDefault();
+            if (item == null)
+            {
+                return RedirectToAction("Proof");
+            }
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult ProofEdit(int? id, Transaction record)
+        {
+            var item = _context.Transactions.Where(i => i.TransactionID == id).SingleOrDefault();
+            item.TransactionID = record.TransactionID;
+            item.Item = record.Item;
+            item.Quantity = record.Quantity;
+            item.UnitCost = record.UnitCost;
+            item.Out = record.Out;
+
+            _context.Transactions.Update(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("Proof");
+        }
+
+        //proof delete
+        public IActionResult ProofDelete(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Proof");
+            }
+
+            var item = _context.Transactions.Where(i => i.TransactionID == id).SingleOrDefault();
+            if (item == null)
+            {
+                return RedirectToAction("Proof");
+            }
+
+            _context.Transactions.Remove(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("Proof");
+        }
+
+        //InKind page
+        public IActionResult InKind()
+        {
+            var list = _context.InKinds.Include(x => x.User).ToList();
+            return View(list);
+        }
+
+        //inkind add
+        public IActionResult InKindCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult InKindCreate(InKind record)
+        {
+            var item = new InKind();
+            {
+                item.UserID = record.UserID;
+                item.InKindID = record.InKindID;
+                item.Item = record.Item;
+                item.Quantity = record.Quantity;
+                item.Date = record.Date;
+            };
+
+            _context.InKinds.Add(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("InKind");
+        }
+
+        //inkind edit
+        public IActionResult InKindEdit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("InKind");
+            }
+
+            var item = _context.InKinds.Where(i => i.InKindID == id).SingleOrDefault();
+            if (item == null)
+            {
+                return RedirectToAction("InKind");
+            }
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult InKindEdit(int? id, InKind record)
+        {
+            var item = _context.InKinds.Where(i => i.InKindID == id).SingleOrDefault();
+            item.UserID = record.UserID;
+            item.InKindID = record.InKindID;
+            item.Item = record.Item;
+            item.Quantity = record.Quantity;
+            item.Date = record.Date;
+
+            _context.InKinds.Update(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("InKind");
+        }
+
+        //inkind delete
+        public IActionResult InKindDelete(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("InKind");
+            }
+
+            var item = _context.InKinds.Where(i => i.InKindID == id).SingleOrDefault();
+            if (item == null)
+            {
+                return RedirectToAction("InKind");
+            }
+
+            _context.InKinds.Remove(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("InKind");
+        }
+
+        public IActionResult TopInKind()
+        {
+            var list = _context.InKinds.Include(x => x.User).OrderByDescending(x => x.Quantity).ToList();
+            return View(list);
+        }
+
+        public IActionResult RecentInKind()
+        {
+            var list = _context.InKinds.Include(x => x.User).OrderByDescending(x => x.Date).ToList();
+            return View(list);
         }
 
         //Gallery Page
