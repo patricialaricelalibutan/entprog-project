@@ -413,6 +413,11 @@ namespace FINALTEST1.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return LocalRedirect("/Identity/Account/Login");
+        }
+
         //Contact Us Page
         public IActionResult Contact()
         {
@@ -461,11 +466,6 @@ namespace FINALTEST1.Controllers
                 }
             }
             return View();
-        }
-
-        public IActionResult Login()
-        {
-            return LocalRedirect("/Identity/Account/Login");
         }
     }
 }
