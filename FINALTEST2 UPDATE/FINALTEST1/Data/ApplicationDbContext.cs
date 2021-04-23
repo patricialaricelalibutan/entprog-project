@@ -14,7 +14,8 @@ namespace FINALTEST1.Data
             : base(options)
         {
         }
-        public DbSet<User> User { get; set; }
+
+        public DbSet<User> Users { get; set; }
         public DbSet<Monetary> Monetaries { get; set; }
         public DbSet<InKind> InKinds { get; set; }
         public DbSet<Transaction> Transactions { get; set; }

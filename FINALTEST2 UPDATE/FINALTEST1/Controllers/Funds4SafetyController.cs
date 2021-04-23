@@ -63,7 +63,7 @@ namespace FINALTEST1.Controllers
             UserID = GetUserId(newUser);
             if (UserID == 0)
             {
-                _context.User.Add(newUser);
+                _context.Users.Add(newUser);
                 _context.SaveChanges();
                 UserID = GetUserId(newUser);
             }
@@ -75,7 +75,7 @@ namespace FINALTEST1.Controllers
         private int GetUserId(User user)
         {
             // SQL: SELECT USerID FROM Users WHERE FirstName = user.FirstName AND LastName = user.LastName AND City = user.City AND Email = user.Email
-            var User = from u in _context.User
+            var User = from u in _context.Users
                        where u.FirstName == user.FirstName && 
                        u.LastName == user.LastName && 
                        u.City == user.City && 
@@ -465,6 +465,46 @@ namespace FINALTEST1.Controllers
                     ViewBag.Message = "Inquiry sent.";
                 }
             }
+
+            using (MailMessage mail = new MailMessage("funds4safety@gmail.com", "patricialaricela.libutan@benilde.edu.ph"))
+            {
+                mail.Subject = record.Subject;
+
+                string message = "<div class='header header--padded--inline' id='emb-email-header-container'>" +
+                                    "<div class='logo emb-logo-margin-box' align='center' style='Margin-top:20px;Margin-bottom:20px;'>" +
+                                        "<div align='center' id='emb-email-header' class='logo-center'>" +
+                                            "<img src='https://i1.createsend1.com/resize/ti/y/29/80A/5BC/eblogo/LogoFunds4Safety.png' alt='' width='315' style='max-width:315px'>" +
+                                        "</div>" +
+                                    "</div>" +
+                                 "</div>" +
+                                 "<br />" +
+                                 "<br />" +
+                                 "<h1>Hi, " + record.SenderName + " has a question</h1>" +
+                                 "<br />" +
+                                 "<h2>Message:</h2>" +
+                                 "<p style='font-size:17px'>" + record.Message + "</p>" +
+                                 "<br />" +
+                                 "<h2>Email:</h2>" +
+                                 "<p style='font-size:17px'>" + record.Email + "</p>" +
+                                 "<br />" +
+                                 "<h3>Funds4Safety<br />155 9th Street Cor. 10th Avenue Grace Park 1400, Caloocan City, Philippines</h3>";
+
+                mail.Body = message;
+                mail.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    NetworkCredential NetworkCred = new NetworkCredential("funds4safety@gmail.com", "entprog123");
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mail);
+                    ViewBag.Message = "Inquiry sent.";
+                }
+            }
+
             return View();
         }
     }
