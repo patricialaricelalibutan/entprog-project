@@ -33,6 +33,6 @@ namespace FINALTEST1.Models
         //Navigation property
         public User User { get; set; }
 
-        //public Transaction Transaction { get; set; }
+        public Transaction Transaction { get; set; }
     }
 }

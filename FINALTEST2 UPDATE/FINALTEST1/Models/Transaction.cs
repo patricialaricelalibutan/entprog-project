@@ -13,8 +13,8 @@ namespace FINALTEST1.Models
         [Key]
         public int TransactionID { get; set; }
 
-        //[ForeignKey("InKind")]
-        //public int? InKindID { get; set; }
+        [ForeignKey("InKind")]
+        public int? InKindID { get; set; }
 
         public string Item { get; set; }
 
@@ -31,6 +31,6 @@ namespace FINALTEST1.Models
         public bool Out { get; set; }
 
         //Navigation property
-        //public InKind InKind { get; set; }
+        public InKind InKind { get; set; }
     }
 }
