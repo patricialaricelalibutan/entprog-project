@@ -12,7 +12,7 @@ namespace FINALTEST1.Models
 {
     class DonatorsDataAccessLayer
     {
-        private const string ConnectionString = "Server=tcp:entprog-db-server.database.windows.net,1433;Initial Catalog=Funds4Safety_db;Persist Security Info=False;User ID=libutanp;Password=P18977078*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private const string ConnectionString = "Server=LAPTOP-62Q6SGTI;Database=Funds4Safety;UID=libutanp;PWD=189770781;";
         private SqlConnection cn = new SqlConnection(ConnectionString);
         private SqlCommand cmd;
 
